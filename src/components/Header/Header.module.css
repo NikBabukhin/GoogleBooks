@@ -1,0 +1,24 @@
+.header {
+    width: 100%;
+    padding: 20px 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.header__container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header h2 {
+    color: #0d1117;
+    font-size: 30px;
+    margin: 5px 0;
+}

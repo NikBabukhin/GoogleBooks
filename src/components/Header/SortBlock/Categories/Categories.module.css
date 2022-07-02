@@ -1,0 +1,12 @@
+.wrapper {
+    width: 40%;
+}
+
+.wrapper span {
+    padding-right: 5px;
+    color: #0d1117;
+}
+
+.wrapper select {
+    font-size: 17px;
+}

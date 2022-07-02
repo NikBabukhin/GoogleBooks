@@ -1,0 +1,24 @@
+.main__wrapper {
+    padding: 20px;
+    min-width: 30%;
+    width: 320px;
+}
+
+.wrapper {
+    padding: 20px;
+    background-color: #1e2023;
+    text-align: start;
+}
+
+.image__wrapper {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.category {
+    text-transform: capitalize;
+    font-size: 15px;
+}
