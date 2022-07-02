@@ -10,8 +10,9 @@ function App() {
         <div className="App">
             <Header/>
             <span className={'result__span'}>Found <strong>{res}</strong> results</span>
-            {/*<BookList/>*/}
+            <BookList/>
             <BookCard/>
+            <button className={'button'}>load more</button>
         </div>
     );
 }

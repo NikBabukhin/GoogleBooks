@@ -1,8 +1,43 @@
 .card__wrapper {
-    margin-top: 10px;
+    padding-top: 10px;
+    margin: 0 auto;
     display: flex;
     width: 100%;
     max-width: 900px;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.card__description {
+    padding: 15px 0 0 15px;
+    text-align: start;
+}
+
+.card__description_category {
+    font-size: 15px;
+    color: grey;
+    text-transform: capitalize;
+}
+
+.card__description_name {
+    margin: 20px 0;
+    font-size: 30px;
+}
+
+.card__description_author {
+    font-size: 15px;
+    color: grey;
+    margin-bottom: 15px;
+}
+
+.card__description_description {
+    padding: 12px 20px;
+    box-sizing: border-box;
+    height: 150px;
+    font-size: 20px;
+    font-weight: bold;
+    resize: none;
+    color: #9f9c9c;
+    border: 1px solid #9f9c9c;
+    background-color: #0d1117;
 }

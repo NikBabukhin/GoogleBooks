@@ -3,4 +3,5 @@ export const testBook = {
     category: 'computers',
     name: 'Some Book name',
     authors: 'Hello world author',
+    description: 'about book'
 }
