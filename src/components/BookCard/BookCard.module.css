@@ -33,11 +33,13 @@
 .card__description_description {
     padding: 12px 20px;
     box-sizing: border-box;
-    height: 150px;
+    height: 200px;
     font-size: 20px;
     font-weight: bold;
     resize: none;
     color: #9f9c9c;
     border: 1px solid #9f9c9c;
     background-color: #0d1117;
+    outline: none;
 }
+

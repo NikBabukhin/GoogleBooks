@@ -1,9 +1,16 @@
 import style from "./Sort.module.css"
-import {useState} from "react";
+import React, {ChangeEvent} from "react";
+import {SortType} from "../../../../redux/reducer";
 
-export const Sort = () => {
-    const onChangeCallBack = (e: any) => {
-        console.log(e.currentTarget.value)
+type SortPropsType = {
+    changeSortOption: (newSort: SortType) => void,
+}
+
+export const Sort: React.FC<SortPropsType> = (props) => {
+
+    const onChangeCallBack = (e: ChangeEvent<HTMLSelectElement>) => {
+        // @ts-ignore
+        props.changeSortOption(e.currentTarget.value)
     }
 
     return <div className={style.wrapper}>

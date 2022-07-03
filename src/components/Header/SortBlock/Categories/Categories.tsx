@@ -1,9 +1,16 @@
 import style from './Categories.module.css'
-import {useState} from "react";
+import React, {ChangeEvent} from "react";
+import {CategoriesType} from "../../../../redux/reducer";
 
-export const Categories = () => {
-    const onChangeCallBack = (e: any) => {
-        console.log(e.currentTarget.value)
+type CategoriesPropsType = {
+    changeCategoryOption: (newCategory: CategoriesType) => void,
+}
+
+export const Categories: React.FC<CategoriesPropsType> = (props) => {
+
+    const onChangeCallBack = (e: ChangeEvent<HTMLSelectElement>) => {
+        // @ts-ignore
+        props.changeCategoryOption(e.currentTarget.value)
     }
 
     return <div className={style.wrapper}>
