@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .input {
@@ -15,6 +16,7 @@
     background-color: #D0CCCCFF;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    transition: all ease .2s;
 }
 
 
@@ -22,6 +24,10 @@
     color: #525050;
     font-size: 17px;
     letter-spacing: 1.5px;
+}
+
+.input__error {
+    background-color: #DA9292FF;
 }
 
 .button {
@@ -44,4 +50,16 @@
 
 .button:active {
     transform: scale(1.1);
+}
+
+.button__error {
+    background-color: #da9292;
+}
+
+.error__span {
+    position: absolute;
+    top: 50px;
+    left: 40%;
+    color: red;
+    font-size: 20px;
 }

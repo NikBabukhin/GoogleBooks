@@ -6,8 +6,16 @@ import {BookCard} from "./components/BookCard/BookCard";
 import {SearchResult} from "./components/SearchResult/SearchResult";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "./redux/store";
-import {CategoriesType, changeCategory, changeCurrentSearch, changeSort, SortType} from "./redux/find-options-reducer";
-import {getBooks} from "./redux/find-reducer";
+import {
+    CategoriesType,
+    changeCategory,
+    changeCurrentSearch,
+    changeSort,
+    saveLastSearch,
+    SortType
+} from "./redux/find-options-reducer";
+import {getBooks, getMoreBooks} from "./redux/find-reducer";
+import preloader from './images/Preloader.svg'
 
 function App() {
 
@@ -20,7 +28,11 @@ function App() {
     const changeCategoryOption = (newCategory: CategoriesType) => dispatch(changeCategory(newCategory));
     // @ts-ignore
     const findBooks = () => dispatch(getBooks(state.findOptions.currentSearch, state.findOptions.sortBy, state.findOptions.categories));
-
+    const findMoreBooks = () => {
+        // @ts-ignore
+        dispatch(getMoreBooks(state.findOptions.lastSearch, state.bookItems.items.length))
+    }
+    
 
     return (
         <div className="App">
@@ -33,14 +45,18 @@ function App() {
                 changeCategoryOption={changeCategoryOption}
                 findBooks={findBooks}
             />
-            <SearchResult
-                resultsCount={state.findOptions.resultCount}
-            />
-            {state.bookItems.items.length > 0 && <BookList
+            {state.findOptions.isLoading ? <img src={preloader}/> :
+                <SearchResult
+                    resultsCount={state.findOptions.resultCount}
+                />
+            }
+            {state.bookItems.items.length > 0 && !state.findOptions.isLoading && <BookList
                 bookItems={state.bookItems.items}
             />}
+            {state.bookItems.items.length > 0 &&
+                <button className={'button'} onClick={findMoreBooks}>load more</button>}
             <BookCard/>
-            <button className={'button'}>load more</button>
+
         </div>
     );
 }

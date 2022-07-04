@@ -11,9 +11,9 @@ export const BookList: React.FC<BookListPropsType> = (props) => {
         {props.bookItems.map(el => !!el && <BookItem
             key={el.id}
             imageURL={el.imageURL}
-            category={el.categories ? el.categories[0] : '*Without category*'}
+            category={el.categories ? el.categories[0] : ''}
             name={el.title}
-            authors={el.authors[0]}
+            authors={el.authors}
         />)}
     </div>
 }

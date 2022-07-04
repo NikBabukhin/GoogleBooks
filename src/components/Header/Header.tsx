@@ -12,7 +12,7 @@ type HeaderPropsType = {
     changeSearchText: (newText: string) => void,
     changeSortOption: (newSort: SortType) => void,
     changeCategoryOption: (newCategory: CategoriesType) => void,
-    findBooks: (booksArr:any[])=>void,
+    findBooks: (booksArr: any[]) => void,
 }
 
 export const Header: React.FC<HeaderPropsType> = (props) => {
