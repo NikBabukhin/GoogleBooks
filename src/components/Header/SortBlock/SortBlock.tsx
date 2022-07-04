@@ -2,7 +2,7 @@ import style from "./SortBlock.module.css"
 import {Sort} from "./Sort/Sort";
 import {Categories} from "./Categories/Categories";
 import React from "react";
-import {CategoriesType, SortType} from "../../../redux/reducer";
+import {CategoriesType, SortType} from "../../../redux/find-options-reducer";
 
 type SortBlockType = {
     changeSortOption: (newSort: SortType) => void,

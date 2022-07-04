@@ -1,6 +1,6 @@
 import style from './Categories.module.css'
 import React, {ChangeEvent} from "react";
-import {CategoriesType} from "../../../../redux/reducer";
+import {CategoriesType} from "../../../../redux/find-options-reducer";
 
 type CategoriesPropsType = {
     changeCategoryOption: (newCategory: CategoriesType) => void,

@@ -1,6 +1,6 @@
 import style from "./Sort.module.css"
 import React, {ChangeEvent} from "react";
-import {SortType} from "../../../../redux/reducer";
+import {SortType} from "../../../../redux/find-options-reducer";
 
 type SortPropsType = {
     changeSortOption: (newSort: SortType) => void,

@@ -1,13 +1,19 @@
-import {testBook} from "../testBook";
-
 const CATEGORY = 'CATEGORY';
 const SORT = 'SORT';
 const CURRENT_SEARCH = 'CURRENT-SEARCH';
+const TOGGLE_LOADING = 'TOGGLE-LOADING';
+const CHANGE_RESULT_COUNT = 'CHANGE-RESULT-COUNT'
 
 type ChangeCategoryActionType = { type: 'CATEGORY', payload: CategoriesType };
 type ChangeSortActionType = { type: 'SORT', payload: SortType };
 type ChangeCurrentSearchActionType = { type: 'CURRENT-SEARCH', payload: string };
-type ActionTypes = ChangeCategoryActionType | ChangeSortActionType | ChangeCurrentSearchActionType;
+type ChangeResultCountActionType = { type: 'CHANGE-RESULT-COUNT', payload: number };
+type ToggleLoadingActionType = { type: 'TOGGLE-LOADING' };
+type ActionTypes =
+    ChangeCategoryActionType
+    | ChangeSortActionType
+    | ChangeCurrentSearchActionType
+    | ToggleLoadingActionType | ChangeResultCountActionType;
 export type SortType = 'relevance' | 'newest';
 export type CategoriesType = 'all' | 'art' | 'biography' | 'computers' | 'history' | 'medical' | 'poetry';
 type StateType = {
@@ -15,8 +21,7 @@ type StateType = {
     sortBy: SortType,
     isLoading: boolean,
     currentSearch: string,
-    resultCounter: number,
-    items: any[],
+    resultCount: number,
 }
 
 const initialState: StateType = {
@@ -24,8 +29,7 @@ const initialState: StateType = {
     sortBy: 'relevance',
     isLoading: false,
     currentSearch: '',
-    resultCounter: 0,
-    items: [testBook, testBook],
+    resultCount: 0,
 }
 
 export const changeFindOptionsReducer = (state = initialState, action: ActionTypes): StateType => {
@@ -36,6 +40,12 @@ export const changeFindOptionsReducer = (state = initialState, action: ActionTyp
             return {...state, sortBy: action.payload}
         case CURRENT_SEARCH:
             return {...state, currentSearch: action.payload}
+        case TOGGLE_LOADING: {
+            return {...state, isLoading: !state.isLoading}
+        }
+        case CHANGE_RESULT_COUNT: {
+            return {...state, resultCount: action.payload}
+        }
         default:
             return state
     }
@@ -50,3 +60,5 @@ export const changeCurrentSearch = (newText: string): ChangeCurrentSearchActionT
     type: CURRENT_SEARCH,
     payload: newText,
 })
+export const toggleLoading = () => ({type: TOGGLE_LOADING})
+export const changeResultCount = (resultsCount: number) => ({type: CHANGE_RESULT_COUNT, payload: resultsCount})

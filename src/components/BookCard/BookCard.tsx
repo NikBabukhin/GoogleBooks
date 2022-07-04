@@ -8,7 +8,7 @@ export const BookCard = () => {
             <img src={testBook.imageURL} width={'350px'} height={'500px'}/>
         </div>
         <div className={style.card__description}>
-            <span className={style.card__description_category}>{testBook.category}</span>
+            <span className={style.card__description_category}>{testBook.categories[0]}</span>
             <h3 className={style.card__description_name}>{testBook.name}</h3>
             <div className={style.card__description_author}>{testBook.authors}</div>
             <textarea
