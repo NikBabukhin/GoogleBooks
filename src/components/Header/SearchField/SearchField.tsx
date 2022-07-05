@@ -1,6 +1,8 @@
 import style from './SearchField.module.css'
 import React, {useState} from "react";
 import {KeyboardEvent} from 'react';
+import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom'
 
 type SearchFieldType = {
     changeSearchText: (newText: string) => void,
@@ -11,6 +13,15 @@ type SearchFieldType = {
 export const SearchField: React.FC<SearchFieldType> = (props) => {
     const [value, setValue] = useState(props.currentSearchText)
     const [error, setError] = useState(false)
+
+    let navigate = useNavigate();
+
+    const handleSubmit = (event: KeyboardEvent<HTMLInputElement>) => {
+        event.preventDefault();
+        navigate("../", {replace: true})
+    }
+
+
     const changeSearchText = (newText: string) => {
         setError(false)
         setValue(newText)
@@ -18,12 +29,16 @@ export const SearchField: React.FC<SearchFieldType> = (props) => {
     }
 
     const onEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        e.code === 'Enter' && findBooks()
+        if (e.code === 'Enter') {
+            handleSubmit(e)
+            findBooks()
+        }
     }
 
     const findBooks = () => {
         if (value.trim()) {
             props.findBooks()
+            navigate("../", {replace: true})
         } else {
             setError(true)
         }
@@ -44,6 +59,10 @@ export const SearchField: React.FC<SearchFieldType> = (props) => {
             onKeyPress={onEnterPress}
         />
         {error && <span className={style.error__span}>Title required</span>}
-        <button className={finalClassForButton} onClick={findBooks}>&#128269;</button>
+
+        <button className={finalClassForButton} onClick={findBooks}>{!props.currentSearchText ? <span>&#128269;</span> :
+            <Link
+                to={'/'}>&#128269;</Link>}</button>
+
     </div>
 }

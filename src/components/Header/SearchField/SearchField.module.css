@@ -43,6 +43,11 @@
     transition: all ease .2s;
 }
 
+.button a {
+    width: 100%;
+    height: 100%;
+}
+
 .button:hover {
     cursor: pointer;
     font-size: 19px;
