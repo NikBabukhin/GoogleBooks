@@ -6,7 +6,7 @@ import {
 } from "./find-options-reducer";
 import axios from "axios";
 import {Dispatch} from "redux";
-import {CategoriesType, SortType} from "../settings";
+import {APIKey, CategoriesType, paginationCount, SortType} from "../settings";
 
 //Helper variables
 const SET_BOOKS = 'SET-BOOKS';
@@ -90,7 +90,7 @@ export const setCurrentBook = (currentBook: CurrentBookType): SetCurrentBookActi
 export const getBooks = (searchText: string, sortBy: SortType, category: CategoriesType) => (dispatch: Dispatch) => {
     dispatch(toggleLoading())
     dispatch(saveLastSearch(searchText, category, sortBy))
-    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchText}${category !== 'all' ? `+subject:${category}` : ''}&maxResults=3&orderBy=${sortBy}&key=AIzaSyAUW0f_yW_WmR2kAMfclupp3OUO2aN-CW0`).then(response => {
+    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchText}${category !== 'all' ? `+subject:${category}` : ''}&maxResults=${paginationCount}&orderBy=${sortBy}&key=${APIKey}`).then(response => {
         let booksItems = response.data.items.map((book: any) => {
             let imageLink = '';
             if (book.volumeInfo.imageLinks) {
@@ -109,13 +109,13 @@ export const getBooks = (searchText: string, sortBy: SortType, category: Categor
         dispatch(setBooks(booksItems))
         dispatch(toggleLoading())
     }).catch((error: any) => {
-        console.log('catch')
+        console.log(error.response.data.message)
         dispatch(toggleLoading())
         return Promise.reject(error)
     })
 }
 export const getMoreBooks = (lastSearch: LastSearchOptionsType, itemsLength: number) => (dispatch: Dispatch) => {
-    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${lastSearch.text}${lastSearch.categories !== 'all' ? `+subject:${lastSearch.categories}` : ''}&maxResults=3&startIndex=${itemsLength}&orderBy=${lastSearch.sortBy}&key=AIzaSyAUW0f_yW_WmR2kAMfclupp3OUO2aN-CW0`).then(response => {
+    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${lastSearch.text}${lastSearch.categories !== 'all' ? `+subject:${lastSearch.categories}` : ''}&maxResults=${paginationCount}&startIndex=${itemsLength}&orderBy=${lastSearch.sortBy}&key=${APIKey}`).then(response => {
         let booksItems = response.data.items.map((book: any) => {
             let imageLink = '';
             if (book.volumeInfo.imageLinks) {
@@ -139,7 +139,7 @@ export const getMoreBooks = (lastSearch: LastSearchOptionsType, itemsLength: num
 }
 export const getBookInformation = (id: string) => (dispatch: Dispatch) => {
     dispatch(toggleLoading())
-    axios.get(`https://www.googleapis.com/books/v1/volumes/${id}?key=AIzaSyAUW0f_yW_WmR2kAMfclupp3OUO2aN-CW0`).then(response => {
+    axios.get(`https://www.googleapis.com/books/v1/volumes/${id}?key=${APIKey}`).then(response => {
         let imageLink = '';
         if (response.data.volumeInfo.imageLinks) {
             imageLink = response.data.volumeInfo.imageLinks.thumbnail
@@ -156,14 +156,6 @@ export const getBookInformation = (id: string) => (dispatch: Dispatch) => {
         dispatch(toggleLoading())
     }).catch((error: any) => {
         console.log(error.response.data.error.message)
-        dispatch(setCurrentBook({
-            id: '',
-            imageURL: '1235646489',
-            title: '1235646489',
-            categories: ['1235646489'],
-            authors: ['1235646489'],
-            description: '1235646489',
-        }))
         dispatch(toggleLoading())
         return Promise.reject(error)
     })

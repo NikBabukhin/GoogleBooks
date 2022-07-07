@@ -10,4 +10,5 @@ export type SettingsStateType = {
 export const categories: CategoriesType[] = ['all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry'];
 export const sort: SortType[] = ['relevance', 'newest'];
 
-export const testVariable = 2;
+export const APIKey = 'AIzaSyAUW0f_yW_WmR2kAMfclupp3OUO2aN-CW0';
+export const paginationCount = 10;
