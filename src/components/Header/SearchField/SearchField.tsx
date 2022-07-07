@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom'
 type SearchFieldType = {
     changeSearchText: (newText: string) => void,
     currentSearchText: string,
-    findBooks: any
+    findBooks: () => void,
 }
 
 export const SearchField: React.FC<SearchFieldType> = (props) => {

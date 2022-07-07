@@ -2,8 +2,8 @@ import style from './Header.module.css'
 import image from './../../images/header-book.jpg'
 import {SearchField} from "./SearchField/SearchField";
 import {SortBlock} from "./SortBlock/SortBlock";
-import {CategoriesType, SortType} from "../../redux/find-options-reducer";
 import React from "react";
+import {CategoriesType, SortType} from "../../settings";
 
 type HeaderPropsType = {
     currentSearchText: string,
@@ -12,10 +12,10 @@ type HeaderPropsType = {
     changeSearchText: (newText: string) => void,
     changeSortOption: (newSort: SortType) => void,
     changeCategoryOption: (newCategory: CategoriesType) => void,
-    findBooks: (booksArr: any[]) => void,
+    findBooks: () => void,
 }
 
-export const Header: React.FC<HeaderPropsType> = (props) => {
+const HeaderMemo: React.FC<HeaderPropsType> = (props) => {
 
     return <header className={style.header} style={{backgroundImage: `url(${image})`}}>
         <div className={style.header__container}>
@@ -32,3 +32,5 @@ export const Header: React.FC<HeaderPropsType> = (props) => {
         </div>
     </header>
 }
+
+export const Header = React.memo(HeaderMemo)

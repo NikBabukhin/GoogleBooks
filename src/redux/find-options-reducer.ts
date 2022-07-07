@@ -1,3 +1,7 @@
+//Helper variables
+
+import {categories, CategoriesType, SettingsStateType, sort, SortType} from "../settings";
+
 const CATEGORY = 'CATEGORY';
 const SORT = 'SORT';
 const CURRENT_SEARCH = 'CURRENT-SEARCH';
@@ -5,34 +9,35 @@ const TOGGLE_LOADING = 'TOGGLE-LOADING';
 const CHANGE_RESULT_COUNT = 'CHANGE-RESULT-COUNT';
 const SAVE_SEARCH_RESULT = 'SAVE-SEARCH-RESULT'
 
+//Types
 type ChangeCategoryActionType = { type: 'CATEGORY', payload: CategoriesType };
 type ChangeSortActionType = { type: 'SORT', payload: SortType };
 type ChangeCurrentSearchActionType = { type: 'CURRENT-SEARCH', payload: string };
-type SaveLastSearch = { type: 'SAVE-SEARCH-RESULT', payload: { categories: CategoriesType, sortBy: SortType, text: string } }
+type SaveLastSearchActionType = { type: 'SAVE-SEARCH-RESULT', payload: { categories: CategoriesType, sortBy: SortType, text: string } }
 type ChangeResultCountActionType = { type: 'CHANGE-RESULT-COUNT', payload: number };
 type ToggleLoadingActionType = { type: 'TOGGLE-LOADING' };
-type ActionTypes =
+export type FindActionTypes =
     ChangeCategoryActionType
     | ChangeSortActionType
     | ChangeCurrentSearchActionType
-    | ToggleLoadingActionType | ChangeResultCountActionType | SaveLastSearch;
-export type SortType = 'relevance' | 'newest';
-export type CategoriesType = 'all' | 'art' | 'biography' | 'computers' | 'history' | 'medical' | 'poetry';
+    | ToggleLoadingActionType | ChangeResultCountActionType | SaveLastSearchActionType;
 export type LastSearchOptionsType = {
     categories: CategoriesType,
     sortBy: SortType,
     text: string,
 }
-
 type StateType = {
     categories: CategoriesType,
     sortBy: SortType,
     isLoading: boolean,
     currentSearch: string,
     lastSearch: LastSearchOptionsType,
+    settings: SettingsStateType
     resultCount: number,
 }
 
+
+//Initial state
 const initialState: StateType = {
     categories: 'all',
     sortBy: 'relevance',
@@ -43,10 +48,16 @@ const initialState: StateType = {
         sortBy: 'relevance',
         text: '',
     },
+    settings: {
+        settingsCategory: categories,
+        settingsSort: sort,
+    },
     resultCount: 0,
 }
 
-export const changeFindOptionsReducer = (state = initialState, action: ActionTypes): StateType => {
+
+//Main Reducer
+export const changeFindOptionsReducer = (state = initialState, action: FindActionTypes): StateType => {
     switch (action.type) {
         case CATEGORY:
             return {...state, categories: action.payload}
@@ -54,20 +65,20 @@ export const changeFindOptionsReducer = (state = initialState, action: ActionTyp
             return {...state, sortBy: action.payload}
         case CURRENT_SEARCH:
             return {...state, currentSearch: action.payload}
-        case TOGGLE_LOADING: {
+        case TOGGLE_LOADING:
             return {...state, isLoading: !state.isLoading}
-        }
-        case CHANGE_RESULT_COUNT: {
+        case CHANGE_RESULT_COUNT:
             return {...state, resultCount: action.payload}
-        }
-        case SAVE_SEARCH_RESULT: {
+        case SAVE_SEARCH_RESULT:
             return {...state, lastSearch: {...action.payload}}
-        }
+        //Default
         default:
             return state
     }
 }
 
+
+//Action creators
 export const changeCategory = (newCategory: CategoriesType): ChangeCategoryActionType => ({
     type: CATEGORY,
     payload: newCategory,
@@ -77,9 +88,12 @@ export const changeCurrentSearch = (newText: string): ChangeCurrentSearchActionT
     type: CURRENT_SEARCH,
     payload: newText,
 })
-export const toggleLoading = () => ({type: TOGGLE_LOADING})
-export const saveLastSearch = (text: string, categories: CategoriesType, sortBy: SortType) => ({
+export const toggleLoading = (): ToggleLoadingActionType => ({type: TOGGLE_LOADING})
+export const saveLastSearch = (text: string, categories: CategoriesType, sortBy: SortType): SaveLastSearchActionType => ({
     type: SAVE_SEARCH_RESULT,
     payload: {text, categories, sortBy}
 })
-export const changeResultCount = (resultsCount: number) => ({type: CHANGE_RESULT_COUNT, payload: resultsCount})
+export const changeResultCount = (resultsCount: number): ChangeResultCountActionType => ({
+    type: CHANGE_RESULT_COUNT,
+    payload: resultsCount
+})

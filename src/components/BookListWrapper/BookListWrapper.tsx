@@ -5,13 +5,13 @@ import {BookList} from "./BookList/BookList";
 import {AppStoreType} from "../../redux/store";
 import {useDispatch, useSelector} from "react-redux";
 import {getMoreBooks} from "../../redux/find-reducer";
+import {AppDispatch} from "../../App";
 
 export const BookListWrapper = () => {
     const state: AppStoreType = useSelector<AppStoreType, AppStoreType>(state => state)
-    const dispatch = useDispatch()
+    const dispatch: AppDispatch = useDispatch();
 
     const findMoreBooks = () => {
-        // @ts-ignore
         dispatch(getMoreBooks(state.findOptions.lastSearch, state.bookItems.items.length))
     }
 
