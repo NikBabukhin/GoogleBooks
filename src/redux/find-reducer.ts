@@ -109,7 +109,7 @@ export const getBooks = (searchText: string, sortBy: SortType, category: Categor
         dispatch(setBooks(booksItems))
         dispatch(toggleLoading())
     }).catch((error: any) => {
-        console.log(error.response.data.message)
+        console.log(error.response ? error.response.data.message : 'Server error')
         dispatch(toggleLoading())
         return Promise.reject(error)
     })

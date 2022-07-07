@@ -9,7 +9,7 @@ import {
     changeSort, FindActionTypes,
 } from "./redux/find-options-reducer";
 import {BookActionTypes, getBooks} from "./redux/find-reducer";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {HashRouter as Router, Route, Routes} from "react-router-dom";
 import {BookListWrapper} from "./components/BookListWrapper/BookListWrapper";
 import {ThunkDispatch} from "redux-thunk";
 import {CategoriesType, SortType} from "./settings";
