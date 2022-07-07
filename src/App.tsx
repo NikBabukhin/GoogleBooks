@@ -13,7 +13,6 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {BookListWrapper} from "./components/BookListWrapper/BookListWrapper";
 import {ThunkDispatch} from "redux-thunk";
 import {CategoriesType, SortType} from "./settings";
-import preloader from "./images/Preloader.svg"
 import {BookCard} from "./components/BookCard/BookCard";
 
 export type AppDispatch = ThunkDispatch<AppStoreType, any, FindActionTypes | BookActionTypes>

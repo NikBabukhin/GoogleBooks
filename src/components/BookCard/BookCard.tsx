@@ -23,12 +23,12 @@ export const BookCardMemo: React.FC<BookCardPropsType> = (props) => {
 
     useEffect(() => {
         dispatch(getBookInformation(key))
-    }, [key])
+    }, [key, dispatch])
 
     return (
         !props.isLoading ? <div className={style.card__wrapper}>
             <div className={style.card__image}>
-                <img src={state.imageURL} width={'350px'} height={'500px'}/>
+                <img src={state.imageURL} width={'350px'} height={'500px'} alt={'Book'}/>
             </div>
             <div className={style.card__description}>
                 <span className={style.card__description_category}>{categories}</span>
@@ -36,7 +36,7 @@ export const BookCardMemo: React.FC<BookCardPropsType> = (props) => {
                 <div className={style.card__description_author}>{authors}</div>
                 <div>{state.description}</div>
             </div>
-        </div> : <img src={preloader}/>)
+        </div> : <img src={preloader} alt={'Book'}/>)
 }
 
 export const BookCard = React.memo(BookCardMemo)

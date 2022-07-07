@@ -17,7 +17,7 @@ export const BookListWrapper = () => {
 
 
     return <div>
-        {state.findOptions.isLoading ? <img src={preloader}/> :
+        {state.findOptions.isLoading ? <img src={preloader} alt={'preloader'}/> :
             <SearchResult
                 resultsCount={state.findOptions.resultCount}
             />

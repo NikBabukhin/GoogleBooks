@@ -19,7 +19,7 @@ export const BookItem: React.FC<BookItemPropsType> = (props) => {
             <div className={style.wrapper}>
                 <div className={style.image__wrapper}>
                     {props.imageURL &&
-                        <img src={props.imageURL} width={'250px'} height={'300px'}/>
+                        <img src={props.imageURL} width={'250px'} height={'300px'} alt={'book'}/>
                     }
                 </div>
                 <span className={style.category}>{props.category}</span>
